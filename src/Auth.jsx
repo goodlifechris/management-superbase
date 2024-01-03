@@ -9,7 +9,12 @@ export default function Auth() {
     event.preventDefault()
 
     setLoading(true)
-    const { error } = await supabase.auth.signInWithOtp({ email })
+    const { error } = await supabase.auth.signInWithOtp({ email ,
+        options: {
+            /** The redirect url embedded in the email link */
+            emailRedirectTo: "https://management-superbase.vercel.app/"
+    }}
+    )
 
     if (error) {
       alert(error.error_description || error.message)
